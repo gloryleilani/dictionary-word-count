@@ -1,5 +1,8 @@
 
-def count_word(filename):
+
+import sys 
+
+def count_word():
     """Counts words in file and prints them.
 
     Arguments:
@@ -11,28 +14,31 @@ def count_word(filename):
 
     """
 
-    file_containing_words = open(filename)
+    for i in range(len(sys.argv)):
 
-    words_with_counts = {} #To store the count of each word
+        filename= sys.argv[i]
 
-    special_chars = ['.', ',', ':', '?', '"']
+        file_containing_words = open(filename)
 
-    for line in file_containing_words: #Loop through each line, creating lists
-        
-        
-        line = line.rstrip().split(" ")
-        
-        for word in line: #Loop through each word in each list 
+        words_with_counts = {} #To store the count of each word
 
-            word = word.lower()
+        special_chars = ['.', ',', ':', '?', '"']
 
-            for char in word:
-                if char in special_chars:
-                    word = word.replace(char,"")
+        for line in file_containing_words: #Loop through each line, creating lists
+            
+            line = line.rstrip().split(" ")
+            
+            for word in line: #Loop through each word in each list 
 
-            words_with_counts[word] = words_with_counts.get(word, 0) + 1
+                word = word.lower()
 
-    for key, value in words_with_counts.items():
-        print(f"{key} {value}")
+                for char in word:
+                    if char in special_chars:
+                        word = word.replace(char,"")
 
-count_word("twain.txt")
+                words_with_counts[word] = words_with_counts.get(word, 0) + 1
+
+        for key, value in words_with_counts.items():
+            print(f"{key} {value}")
+
+count_word()
