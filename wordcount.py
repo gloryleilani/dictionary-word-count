@@ -18,7 +18,8 @@ def count_word(filename):
     -Dictionary containing word (key) and their counts (values)
     """
 
-    file_containing_words = open(filename)
+    file_containing_words = open(filename).read().replace("\n"," ").split(" ")
+    print(file_containing_words)
 
     words_with_counts = {} #To store the count of each word
 
@@ -26,20 +27,20 @@ def count_word(filename):
 
     cnt = Counter()
 
-    for line in file_containing_words: #Loop through each line, creating lists
+    #for line in file_containing_words: #Loop through each line, creating lists
             
-        line = line.rstrip().split(" ")
+    #    line = line.rstrip().split(" ")
             
 
-        for word in line: #Loop through each word in each list 
+    for word in file_containing_words: #Loop through each word in each list 
 
-            word = word.lower()
+        word = word.lower()
 
-            for char in word:
-                if char in special_chars:
-                    word = word.replace(char,"")
+        for char in word:
+            if char in special_chars:
+                word = word.replace(char,"")
 
-            cnt[word] += 1
+        cnt[word] += 1
 
                 #words_with_counts[word] = words_with_counts.get(word, 0) + 1   
 
