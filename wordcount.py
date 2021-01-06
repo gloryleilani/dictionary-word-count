@@ -6,6 +6,7 @@ from collections import Counter
 for i in range(1,len(sys.argv)):
 
     filename= sys.argv[i]
+    print("filename:", filename)
 
 
 def count_word(filename):
@@ -23,7 +24,7 @@ def count_word(filename):
 
     words_with_counts = {} #To store the count of each word
 
-    special_chars = set(['.', ',', ':', '?', '"']) #sets are faster than lists.
+    special_chars = set(['.', ',', ':', '?', '"', '!']) #sets are faster than lists.
 
     cnt = Counter()
 
@@ -43,42 +44,42 @@ def count_word(filename):
         cnt[word] += 1
 
                 #words_with_counts[word] = words_with_counts.get(word, 0) + 1   
-
+    print("cnt", cnt)
     return cnt
 
 
-def sort_alphabetically(dict):
+def sort_alphabetically(word_counts):
     """Sort dictionary alphabetically by key."""
 
     [print(f"{key} {value}") for (key, value) in 
-    sorted(dict.items(), key=lambda x: x[0])]
+    sorted(word_counts.items(), key=lambda x: x[0])]
         
-    return sorted(dict.items(), key=lambda x: x[0])
+    return sorted(word_counts.items(), key=lambda x: x[0])
 
 
-def sort_descending_values(dict):
+def sort_descending_values(word_counts):
     """Sort dictionary by descending order of values."""
 
     [print(f"{key} {value}") for (key, value) in 
-    sorted(dict.items(), key=lambda x: x[1], reverse=True)]
+    sorted(word_counts.items(), key=lambda x: x[1], reverse=True)]
         
-    return sorted(dict.items(), key=lambda x: x[1], reverse=True)
+    return sorted(word_counts.items(), key=lambda x: x[1], reverse=True)
 
 
-def sort_descending_values_and_alphabetically_by_keys(dict):
+def sort_descending_values_and_alphabetically_by_keys(word_counts):
     """Sort dictionary first by descending order of values and then second by 
     alphabetical words"""
 
     [print(f"{key} {value}") for (key, value) in 
-    sorted(dict.items(), key=lambda x: (-x[1], x[0]))]
+    sorted(word_counts.items(), key=lambda x: (-x[1], x[0]))]
          
-    return sorted(dict.items(), key=lambda x: (-x[1], x[0]))
+    return sorted(word_counts.items(), key=lambda x: (-x[1], x[0]))
 
 
-dict = count_word(filename)
+cnt_dict = count_word(filename)
 
-sort_alphabetically(dict)
+sort_alphabetically(cnt_dict)
 
-sort_descending_values(dict)
+sort_descending_values(cnt_dict)
 
-sort_descending_values_and_alphabetically_by_keys(dict)
+sort_descending_values_and_alphabetically_by_keys(cnt_dict)
